@@ -1,14 +1,12 @@
 # Malaria Drug Action Engine
 
-> **Do estrutura química ao fenótipo do parasita.** Um motor mecanístico, open-source, que calcula —
+> **Da estrutura química ao fenótipo do parasita.** Um motor mecanístico, open-source, que calcula —
 > para *Plasmodium falciparum* — a cadeia: **estrutura → exposição no compartimento do parasita →
 > função molecular → morte por estágio → resistência**.
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 ![Status](https://img.shields.io/badge/status-benchmark_1_falsifiable-blue)
 
-*Nome de trabalho — pode mudar (Virtual Plasmodium / Parasite Digital Pharmacology). O código usa
-nomes genéricos pra um rename não custar nada.*
 
 > **EN / TL;DR:** an open-source mechanistic engine for antimalarial drug action. Most tools stop at
 > "the molecule binds". Antimalarial ADME does **not** end in plasma — there is a *second ADME* into
