@@ -1,0 +1,66 @@
+# ── Python ───────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ── Jupyter ──────────────────────────────────────────────
+.ipynb_checkpoints/
+# commit notebooks with cleared outputs only (the commit-curator skill enforces this)
+
+# ── Secrets / credentials (NEVER commit) ─────────────────
+.env
+.env.*
+*.key
+*.pem
+secrets.*
+credentials*
+# personal PIX / donation keys live ONLY in .github/FUNDING.yml — never in source
+
+# ── Scientific data & heavy artifacts (keep the repo about code, not data) ──
+data/
+results/
+outputs/
+# MD / structure trajectories & ensembles
+*.gro
+*.xtc
+*.trr
+*.dcd
+*.nc
+# large chemistry blobs
+*.h5
+*.hdf5
+*.npy
+*.npz
+# model weights
+*.pt
+*.pth
+*.onnx
+*.ckpt
+*.safetensors
+# archives
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+
+# ── Docking tool outputs (gnina / Vina-GPU) ──────────────
+*_out.pdbqt
+*_docked.*
+vina_*.log
+
+# ── OS / editor ──────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+*.swp

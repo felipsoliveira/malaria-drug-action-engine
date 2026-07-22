@@ -1,0 +1,8 @@
+Malaria Drug Action Engine (working name)
+Copyright 2026 Luis Felipe (girias) and the project contributors
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+An open-source, mechanistic engine that computes, for Plasmodium falciparum,
+the chain from chemical structure -> parasite-compartment exposure -> molecular
+function -> stage-specific phenotype. Built to help malaria researchers.
