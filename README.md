@@ -80,11 +80,12 @@ mutações que não foram usados pra construí-lo**. Senão é só ajuste de cur
 - **Fatia 1:** ion trapping da cloroquina no vacúolo + efluxo do PfCRT — resistência por *exposição*
   checada contra o oráculo analítico de Henderson-Hasselbalch.
 - **Benchmark #1** ([`docs/parameters_pfcrt.md`](docs/parameters_pfcrt.md)): parâmetros reais com DOI
-  e taxonomia `measured/derived/fitted/assumed`; **calibra só no Dd2, congela o modelo e prevê o
-  held-out 7G8**, com propagação de incerteza (Monte Carlo) + análise de sensibilidade.
-  Previsão IC₅₀(7G8) = **119 nM (IC 90% 68–208)** vs observado **84 nM** — *consistente porém fraco*:
-  a cinética de transporte do 7G8 é assumida (paywall) e domina a incerteza. Um único parâmetro livre
-  (κ), identificável. Reproduzir o Dd2 é calibração, não validação.
+  e taxonomia `measured/derived/fitted/assumed`; **calibra só no Dd2, congela e prevê o held-out 7G8**
+  (cinética de Dd2 e 7G8 do *mesmo* experimento — Summers 2014 Table 1), com Monte Carlo + sensibilidade.
+  Resultado **falsificável**: previsão IC₅₀(7G8) = **56 nM (IC 90% 48–66)** vs observado **84 nM → fora
+  do intervalo**. O modelo transporte-só **subprevê ~1,5×** e é *rejeitado para o 7G8* — consistente com
+  o 7G8 ser um outlier transporte↔resistência na literatura. Um único parâmetro livre (κ),
+  estruturalmente identificável sob o modelo. Reproduzir o Dd2 é calibração, não validação.
 
 ## Repositório
 

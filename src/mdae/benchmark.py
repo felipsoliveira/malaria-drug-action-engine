@@ -20,16 +20,20 @@ Vmax/Km is the transporter's specificity constant.)
 
 Identifiability
 ---------------
-``kappa`` is one scalar fixed by one datum (Dd2's fold-resistance). One parameter,
-one constraint -> identifiable and unique (fold is strictly monotincreasing in
-efficiency). We deliberately do NOT fit several free parameters to a single IC50.
+``kappa`` is one scalar fixed by one datum (Dd2's fold-resistance). It is
+**structurally identifiable under this assumed linear model** (one parameter, one
+constraint; fold is strictly monotone in efficiency, so the inverse is unique).
+This is NOT a general practical-identifiability claim: it holds only conditional
+on the model form fold = 1 + kappa*(Vmax/Km) and on the linear-regime assumption.
+We deliberately do NOT fit several free parameters to a single IC50.
 
 Frozen held-out
 ---------------
 ``kappa`` is calibrated from Dd2 (and the WT reference) ONLY. 7G8's IC50 is never
-used to fit it. 7G8's *transport kinetics* (Km, Vmax) enter as input; therefore,
-per the scientific contract, the held-out target is 7G8's PHENOTYPE (IC50 / fold).
-``predict_ic50`` does not take the observed 7G8 IC50 as an argument, by design.
+used to fit it. 7G8's *transport kinetics* (Km, Vmax) enter as input — measured in
+the SAME experiment as Dd2 (Summers 2014 Table 1), so Vmax/Km is comparable across
+strains. Per the scientific contract, the held-out target is therefore 7G8's
+PHENOTYPE (IC50 / fold). ``predict_ic50`` takes no observed 7G8 IC50 argument.
 
 Not this benchmark
 ------------------

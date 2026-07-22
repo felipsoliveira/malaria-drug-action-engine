@@ -1,22 +1,26 @@
 """Sourced parameters for the chloroquine / PfCRT benchmark (slice 2).
 
 Each value cites a primary source; the full traceable table lives in
-``docs/parameters_slice1.md``. Transport kinetics are for CQ moved by PfCRT
-expressed in Xenopus oocytes (assay pH 6.0). IC50 values are from ISOGENIC lines
-differing only in the pfcrt allele (same assay) — so IC50 differences are
-attributable to PfCRT, controlling for genetic background.
+``docs/parameters_pfcrt.md``. Transport kinetics are for CQ moved by PfCRT
+expressed in Xenopus oocytes (acidic medium, ~pH 6.0). IC50 values are from
+ISOGENIC lines differing only in the pfcrt allele (same assay) — so IC50
+differences are attributable to PfCRT, controlling for genetic background.
 
-HONESTY on 7G8: its exact CQ Km/Vmax live in Summers et al. 2014 PNAS Table 1,
-which is paywalled; no open source reproduces the numbers. 7G8 is documented as
-belonging to the high-affinity (low Km) / low-capacity (low Vmax) group AND as an
-OUTLIER in the transport-vs-resistance correlation. We therefore enter 7G8's
-kinetics as ASSUMED bounds and propagate that ignorance — the predicted 7G8 IC50
-is an interval, not a point. Swap in the measured Table-1 values to sharpen it.
+CRITICAL — same-experiment matching: Vmax is an absolute rate whose scale varies
+between assays/batches (e.g. Dd2 Vmax is 61 pmol/oocyte/h in Summers 2014 Table 1
+but 33 in the 2019 phosphomimetic study). Because the benchmark compares the
+transport efficiency Vmax/Km ACROSS strains, Dd2 and 7G8 MUST come from the SAME
+experiment. We therefore take BOTH from Summers et al. 2014 PNAS Table 1
+(verified in the ANU open-access PDF, p. E1762). 7G8 is thus MEASURED here, not
+assumed. The paper also notes 7G8 is an outlier: excluding it raises the
+resistance-index vs transport correlation R^2 from ~0.86 to ~0.98 (Vmax).
 """
 
 from __future__ import annotations
 
 from .provenance import Param, Kind
+
+_SUMMERS = "Summers et al. 2014 PNAS 10.1073/pnas.1322965111, Table 1 (p.E1762; ANU open PDF)"
 
 # --- Compartment pH (measured) ----------------------------------------------
 PH_DV = Param(
@@ -41,31 +45,26 @@ PKA2_CQ = Param(
     source="Warhurst et al.", note="quinoline ring N (second protonation)",
 )
 
-# --- PfCRT CQ transport kinetics, Xenopus oocytes, pH 6.0 -------------------
-# Dd2: MEASURED and robust (agree across Summers 2014, PMC6709616, PMC4276893).
+# --- PfCRT CQ transport kinetics, Xenopus oocytes, ~pH 6.0, SAME experiment --
+# Both from Summers 2014 Table 1 (mean +/- SEM; n = number of experiments).
 KM_DD2 = Param(
-    "Km_CQ_PfCRT_Dd2", 250.0, "uM", Kind.MEASURED, sd=40.0,
-    source="Summers 2014 PNAS 10.1073/pnas.1322965111; confd PMC6709616, PMC4276893",
-    note="250+/-40 uM (related work: 260+/-10, 250+/-30). CQ Km range across variants 117-293 uM.",
+    "Km_CQ_PfCRT_Dd2", 232.0, "uM", Kind.MEASURED, sd=11.0,
+    source=_SUMMERS, note="232+/-11 uM, n=15. NB other assays report ~250 (do not mix with 7G8).",
 )
 VMAX_DD2 = Param(
-    "Vmax_CQ_PfCRT_Dd2", 33.0, "pmol/oocyte/h", Kind.MEASURED, sd=3.0,
-    source="Summers 2014 PNAS; confd PMC6709616, PMC4276893", note="33+/-3 pmol/oocyte/h",
+    "Vmax_CQ_PfCRT_Dd2", 61.0, "pmol/oocyte/h", Kind.MEASURED, sd=6.0,
+    source=_SUMMERS, note="61+/-6 pmol/oocyte/h, n=15 (assay-dependent scale; matched to 7G8)",
 )
-
-# 7G8: ASSUMED bounds (exact Table-1 values paywalled). High-affinity/low-capacity group.
 KM_7G8 = Param(
-    "Km_CQ_PfCRT_7G8", 183.0, "uM", Kind.ASSUMED, low=117.0, high=250.0,
-    source="Summers 2014 PNAS group characterization (exact value paywalled)",
-    note="high-affinity group -> Km below Dd2; bounded by observed variant range 117-250 uM",
+    "Km_CQ_PfCRT_7G8", 117.0, "uM", Kind.MEASURED, sd=6.0,
+    source=_SUMMERS, note="117+/-6 uM, n=6. High-affinity (lowest Km of the CQR variants).",
 )
 VMAX_7G8 = Param(
-    "Vmax_CQ_PfCRT_7G8", 20.0, "pmol/oocyte/h", Kind.ASSUMED, low=10.0, high=33.0,
-    source="Summers 2014 PNAS group characterization (exact value paywalled)",
-    note="low-capacity group -> Vmax below Dd2 (=33); 7G8 is a transport-vs-resistance OUTLIER",
+    "Vmax_CQ_PfCRT_7G8", 9.0, "pmol/oocyte/h", Kind.MEASURED, sd=1.0,
+    source=_SUMMERS, note="9+/-1 pmol/oocyte/h, n=6. Low-capacity; 7G8 is a transport-vs-resistance outlier.",
 )
 
-# --- Isogenic-line CQ IC50 (measured, same assay, PfCRT-only difference) ----
+# --- Isogenic-line CQ IC50 (measured, same assay, PfCRT-only difference) -----
 # From PMC9067703 Table 1: transfectants in the GC03 background.
 IC50_WT = Param(
     "IC50_CQ_isogenic_WT_GC03", 25.0, "nM", Kind.MEASURED, sd=1.1,

@@ -29,8 +29,9 @@ def test_every_param_has_kind_source_and_unit():
     assert D.KM_DD2.unit == "uM" and D.KM_7G8.unit == "uM"
     assert D.VMAX_DD2.unit == "pmol/oocyte/h"
     assert D.IC50_WT.unit == D.IC50_DD2.unit == D.IC50_7G8.unit == "nM"
-    # 7G8 kinetics must be flagged assumed; IC50s measured
-    assert D.KM_7G8.kind is Kind.ASSUMED and D.VMAX_7G8.kind is Kind.ASSUMED
+    # Dd2 and 7G8 kinetics are both measured, from the SAME experiment (Summers Table 1)
+    assert D.KM_7G8.kind is Kind.MEASURED and D.VMAX_7G8.kind is Kind.MEASURED
+    assert D.KM_DD2.source == D.KM_7G8.source == D.VMAX_DD2.source == D.VMAX_7G8.source
     assert D.IC50_DD2.kind is Kind.MEASURED and D.IC50_7G8.kind is Kind.MEASURED
 
 
@@ -42,24 +43,28 @@ def test_calibration_reproduces_dd2_exactly():
 
 
 # --- identifiability: one scalar, strictly monotone -------------------------
-def test_kappa_is_single_identifiable_scalar():
-    k = B.calibrate_kappa(25.0, 132.0, 33.0, 250.0)
+def test_kappa_structurally_identifiable_under_model():
+    # Structural identifiability UNDER the assumed linear model fold = 1 + kappa*(Vmax/Km).
+    # This is NOT a general practical-identifiability claim.
+    k = B.calibrate_kappa(25.0, 132.0, 61.0, 232.0)
     assert isinstance(k, float) and math.isfinite(k) and k > 0
-    # fold strictly increases with transport efficiency -> unique inverse (identifiable)
-    assert B.predict_fold(k, 40.0, 250.0) > B.predict_fold(k, 20.0, 250.0)
+    # fold is strictly monotone in transport efficiency -> the inverse (kappa) is unique
+    assert B.predict_fold(k, 40.0, 232.0) > B.predict_fold(k, 20.0, 232.0)
 
 
-# --- the held-out is FROZEN: prediction cannot see 7G8's IC50 ----------------
-def test_7g8_prediction_independent_of_observed_ic50():
+# --- the held-out is FROZEN: prediction structurally cannot see 7G8's IC50 ----
+def test_7g8_prediction_is_frozen_no_leakage():
+    import inspect
+    # the prediction functions have NO argument for the held-out observation
+    assert list(inspect.signature(B.predict_ic50).parameters) == ["kappa", "ic50_wt", "vmax", "km"]
+    assert list(inspect.signature(B.predict_fold).parameters) == ["kappa", "vmax", "km"]
+    # calibration reads only the reference (WT) + calibration strain (Dd2)
+    assert list(inspect.signature(B.calibrate_kappa).parameters) == [
+        "ic50_wt", "ic50_calib", "vmax_calib", "km_calib"]
+    # functional check: prediction does not depend on the observed 7G8 IC50
     k = B.calibrate_kappa(D.IC50_WT.value, D.IC50_DD2.value, D.VMAX_DD2.value, D.KM_DD2.value)
-    pred = B.predict_ic50(k, D.IC50_WT.value, D.VMAX_7G8.value, D.KM_7G8.value)
-    # Recompute with a wildly different pretend observation available in scope:
-    # the function signature has no IC50_7G8 argument, so the prediction is invariant.
-    assert "ic50" not in B.predict_ic50.__code__.co_varnames[1:4] or True  # documents intent
-    pred_again = B.predict_ic50(k, D.IC50_WT.value, D.VMAX_7G8.value, D.KM_7G8.value)
-    assert pred == pred_again
-    # calibration used only WT + Dd2 inputs:
-    assert D.IC50_7G8.value not in (D.IC50_WT.value, D.IC50_DD2.value)
+    p = B.predict_ic50(k, D.IC50_WT.value, D.VMAX_7G8.value, D.KM_7G8.value)
+    assert p == B.predict_ic50(k, D.IC50_WT.value, D.VMAX_7G8.value, D.KM_7G8.value)
 
 
 # --- Monte Carlo: reproducible + well-formed interval -----------------------
