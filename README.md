@@ -110,7 +110,6 @@ a fonte. Todo parâmetro entra com **proveniência + incerteza**.
 ## 💚 Apoie o projeto
 
 Projeto open-source feito no tempo livre. Formas de apoio serão adicionadas em breve
-(PIX via chave aleatória; plataformas de doação a definir).
 
 ## Licença
 
@@ -118,5 +117,4 @@ Projeto open-source feito no tempo livre. Formas de apoio serão adicionadas em 
 
 ## Agradecimentos
 
-Construído ao lado do motor MD **SHARP** e do pipeline de docking **PfPK2** (gnina, Vina-GPU).
 Referência de fundo: [revisão sobre acesso de antimaláricos aos alvos intracelulares](https://pmc.ncbi.nlm.nih.gov/articles/PMC4419668/).
