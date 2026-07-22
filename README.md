@@ -81,9 +81,12 @@ mutações que não foram usados pra construí-lo**. Senão é só ajuste de cur
   e taxonomia `measured/derived/fitted/assumed`; **calibra só no Dd2, congela e prevê o held-out 7G8**
   (cinética de Dd2 e 7G8 do *mesmo* experimento — Summers 2014 Table 1), com Monte Carlo + sensibilidade.
   Resultado **falsificável**: previsão IC₅₀(7G8) = **56 nM (IC 90% 48–66)** vs observado **84 nM → fora
-  do intervalo**. O modelo transporte-só **subprevê ~1,5×** e é *rejeitado para o 7G8* — consistente com
-  o 7G8 ser um outlier transporte↔resistência na literatura. Um único parâmetro livre (κ),
-  estruturalmente identificável sob o modelo. Reproduzir o Dd2 é calibração, não validação.
+  do intervalo**. Conclusão *estreita* (sem overclaim): a **relação linear Vmax/Km calibrada no Dd2 não
+  transfere pro 7G8** dentro da incerteza — isso localiza a hipótese que falhou, **não** prova
+  "resistência além do transporte". Suspeito nº1: o regime `C_DV≪Km` é violado (Summers estima [CQ] no
+  vacúolo 200–600 µM vs Km 117/232 µM → PfCRT perto da **saturação**). Próximo: ODE **não-linear**
+  (Michaelis–Menten) com critérios pré-declarados + held-out K1/GB4/Ecu1110. Um único parâmetro livre
+  (κ), estruturalmente identificável sob o modelo. Reproduzir o Dd2 é calibração, não validação.
 
 ## Repositório
 

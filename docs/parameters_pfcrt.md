@@ -64,17 +64,31 @@ this one constant. `Vmax/Km` is the transporter's specificity constant.
 | Observed inside predicted 90% CI? | **NO** |
 | Dominant uncertainty (\|Spearman ρ\|) | Vmax_7G8 (0.62), Vmax_Dd2 (0.55) |
 
-**Honest reading — first falsifiable result.** With Dd2 and 7G8 kinetics measured
-in the *same* experiment, the transport-only model calibrated on Dd2 predicts 56 nM
-(90% CI 48–66), but the held-out 7G8 IC₅₀ is 84 nM — **outside** the interval. So a
-CQ‑transport‑only account, tuned on Dd2, **under-predicts 7G8 resistance by ~1.5×**:
-the transport-only hypothesis is **rejected for 7G8**. This is the benchmark working
-as intended (it is falsifiable and it discriminates), and it reproduces a known
-result — 7G8 is a documented transport‑vs‑resistance **outlier** (excluding it raises
-the literature R² from ~0.86 to ~0.98 for Vmax). Interpretation: 7G8 carries CQ
-resistance beyond what its (low) transport efficiency explains, pointing to
-additional biology (fitness/host-factor contributions) to model in later slices.
+**Honest reading — what the held-out localizes (no overclaim).** With Dd2 and 7G8
+kinetics measured in the *same* experiment, the model calibrated on Dd2 predicts 56 nM
+(90% CI 48–66), but the held-out 7G8 IC₅₀ is 84 nM — **outside** the interval. The
+precise, defensible conclusion is narrow:
+
+> The **linear** Vmax/Km relation, calibrated on Dd2, does **not** transfer
+> quantitatively to 7G8 within the declared uncertainty.
+
+That is the one hypothesis that failed. It does **not** show "resistance beyond
+transport", does **not** say PfCRT transport is unimportant, and does **not** refute
+the MDAE. "Falsifiable" means the model declared in advance what would make it fail —
+not that it is "false".
+
+**Prime suspect (test first): the linearization is out of regime.** The model assumes
+`C_DV ≪ Km`, but Summers et al. estimate DV [CQ] ≈ 200–600 µM while Km is 117 µM (7G8)
+and 232 µM (Dd2). PfCRT therefore operates **near saturation**, exactly where Vmax/Km
+alone stops representing the flux (Summers highlights this). Candidate explanations,
+to disentangle in order: (1) the linear approximation breaks down near saturation;
+(2) κ is not transferable across variants; (3) only if the **full nonlinear** model
+still fails across multiple held-out strains would additional biology be indicated.
 The model does get the **rank** right (Dd2 > 7G8 > WT); it misses 7G8's magnitude.
+
+**Next test (pre-registered):** run the full Michaelis–Menten ODE (no `C ≪ Km`
+assumption), declare pass/fail criteria in advance, freeze, and predict K1, GB4 and
+Ecu1110 simultaneously (their Km/Vmax are in the same Summers Table 1).
 
 **Not this benchmark:** the ~10⁴× ion-trapping ratio is the model's ideal
 equilibrium limit from pH/pKa, not experimental cellular accumulation.

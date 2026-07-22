@@ -61,19 +61,19 @@ def main() -> None:
         print(f"  {name:10s} {rho:5.2f}  ({group.get(name, '')})")
 
     print("\n" + "-" * 72)
-    print("Honest reading:")
-    print("  First FALSIFIABLE result. With Dd2 and 7G8 kinetics measured in the SAME")
-    print(f"  experiment, the transport-only model (calibrated on Dd2) predicts "
-          f"{res.ic50_pred_median:.0f} nM")
-    print(f"  (90% CI {res.ic50_pred_ci[0]:.0f}-{res.ic50_pred_ci[1]:.0f}), but the held-out "
-          f"observation is {res.ic50_obs:.0f} nM -- OUTSIDE the interval:")
-    print(f"  transport efficiency alone UNDER-predicts 7G8 resistance by ~{1/res.fold_error:.1f}x.")
-    print("  This is the benchmark working as intended -- it is falsifiable, and for 7G8 the")
-    print("  transport-only hypothesis is REJECTED. It matches the literature: 7G8 is a known")
-    print("  transport-vs-resistance OUTLIER (excluding it raises R^2 0.86->0.98). 7G8 carries")
-    print("  resistance beyond what its (low) CQ transport efficiency explains -- flagging")
-    print("  additional biology to model next, not a coincidence to sell.")
-    print("  NB: reproducing Dd2 is calibration, NOT validation; only 7G8 is the test.")
+    print("Honest reading (what the held-out LOCALIZES — no overclaim):")
+    print(f"  Predicted {res.ic50_pred_median:.0f} nM (90% CI "
+          f"{res.ic50_pred_ci[0]:.0f}-{res.ic50_pred_ci[1]:.0f}); observed {res.ic50_obs:.0f} nM is OUTSIDE it.")
+    print("  Precise conclusion: the LINEAR Vmax/Km relation, calibrated on Dd2, does not")
+    print("  transfer quantitatively to 7G8 within the declared uncertainty. That is the ONE")
+    print("  hypothesis that failed. It does NOT show 'resistance beyond transport', nor that")
+    print("  PfCRT transport is unimportant, nor that the MDAE is refuted.")
+    print("  Prime suspect to test FIRST: the linear regime C_DV << Km is violated -- the DV")
+    print("  [CQ] is ~200-600 uM (Summers) while Km is 117 uM (7G8) / 232 uM (Dd2), so PfCRT")
+    print("  runs NEAR SATURATION, where Vmax/Km alone misrepresents the flux. Next: the full")
+    print("  nonlinear (Michaelis-Menten) ODE, criteria pre-declared, predicting K1/GB4/Ecu1110.")
+    print("  'Falsifiable' = the model said in advance what would fail it -- not 'false'.")
+    print("  Reproducing Dd2 is calibration, not validation; only held-out strains are the test.")
 
 
 if __name__ == "__main__":
