@@ -5,7 +5,7 @@
 > função molecular → morte por estágio → resistência**.
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
-![Status](https://img.shields.io/badge/status-Layer_B_slice_1_validated-blue)
+![Status](https://img.shields.io/badge/status-benchmark_1_falsifiable-blue)
 
 *Nome de trabalho — pode mudar (Virtual Plasmodium / Parasite Digital Pharmacology). O código usa
 nomes genéricos pra um rename não custar nada.*
@@ -76,10 +76,15 @@ mutações que não foram usados pra construí-lo**. Senão é só ajuste de cur
 
 ## Estado
 
-**Layer B — fatia 1 validada.** Já roda: modelo de ion trapping da cloroquina no vacúolo digestivo
-+ efluxo do PfCRT, reproduzindo a resistência por *exposição* e checado contra o oráculo analítico
-de Henderson-Hasselbalch (6/6 testes). Rate constants ainda ilustrativas — o próximo passo é
-ancorá-las em dados reais de PfCRT (ver escada de validação).
+**Layer B validada + Benchmark #1 (falsificável).** 13/13 testes.
+- **Fatia 1:** ion trapping da cloroquina no vacúolo + efluxo do PfCRT — resistência por *exposição*
+  checada contra o oráculo analítico de Henderson-Hasselbalch.
+- **Benchmark #1** ([`docs/parameters_pfcrt.md`](docs/parameters_pfcrt.md)): parâmetros reais com DOI
+  e taxonomia `measured/derived/fitted/assumed`; **calibra só no Dd2, congela o modelo e prevê o
+  held-out 7G8**, com propagação de incerteza (Monte Carlo) + análise de sensibilidade.
+  Previsão IC₅₀(7G8) = **119 nM (IC 90% 68–208)** vs observado **84 nM** — *consistente porém fraco*:
+  a cinética de transporte do 7G8 é assumida (paywall) e domina a incerteza. Um único parâmetro livre
+  (κ), identificável. Reproduzir o Dd2 é calibração, não validação.
 
 ## Repositório
 
