@@ -20,7 +20,7 @@ from .oracle import accumulation_ratio
 from .exposure import IonTrapModel, Compartment
 from .function import occupancy, above_threshold
 from .provenance import Param, Kind
-from . import benchmark, pfcrt_data
+from . import benchmark, benchmark_1b, pfcrt_data, enzyme
 
 __version__ = "0.1.0"
 
