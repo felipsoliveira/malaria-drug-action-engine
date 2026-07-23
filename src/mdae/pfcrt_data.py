@@ -64,6 +64,15 @@ VMAX_7G8 = Param(
     source=_SUMMERS, note="9+/-1 pmol/oocyte/h, n=6. Low-capacity; 7G8 is a transport-vs-resistance outlier.",
 )
 
+# Held-out strain kinetics (Summers 2014 Table 1, same experiment). These are
+# transport INPUTS, not the held-out phenotype (which is the RI, from Table S2).
+KM_K1 = Param("Km_CQ_PfCRT_K1", 293.0, "uM", Kind.MEASURED, sd=10.0, source=_SUMMERS, note="293+/-10, n=6")
+VMAX_K1 = Param("Vmax_CQ_PfCRT_K1", 79.0, "pmol/oocyte/h", Kind.MEASURED, sd=17.0, source=_SUMMERS, note="79+/-17, n=6")
+KM_GB4 = Param("Km_CQ_PfCRT_GB4", 275.0, "uM", Kind.MEASURED, sd=16.0, source=_SUMMERS, note="275+/-16, n=7")
+VMAX_GB4 = Param("Vmax_CQ_PfCRT_GB4", 57.0, "pmol/oocyte/h", Kind.MEASURED, sd=5.0, source=_SUMMERS, note="57+/-5, n=7")
+KM_ECU = Param("Km_CQ_PfCRT_Ecu1110", 191.0, "uM", Kind.MEASURED, sd=17.0, source=_SUMMERS, note="191+/-17, n=5")
+VMAX_ECU = Param("Vmax_CQ_PfCRT_Ecu1110", 36.0, "pmol/oocyte/h", Kind.MEASURED, sd=4.0, source=_SUMMERS, note="36+/-4, n=5")
+
 # --- Isogenic-line CQ IC50 (measured, same assay, PfCRT-only difference) -----
 # From PMC9067703 Table 1: transfectants in the GC03 background.
 IC50_WT = Param(
