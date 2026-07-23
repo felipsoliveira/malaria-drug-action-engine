@@ -88,3 +88,19 @@ IC50_7G8 = Param(
     source="PMC9067703 Table 1 (line C67G8)",
     note="84+/-3.5 nM; HELD-OUT phenotype — never used to calibrate the model",
 )
+
+# --- Table S2 CQ resistance indices (Summers thesis Table 6.3 = PNAS Table S2) ---
+# HETEROGENEOUS COMPILATION. Per the table's own note: each RI uses the CQS strain
+# measured in that same study; when a study has several CQS, their mean is used; then
+# results from DIFFERENT studies are aggregated. There is NO common CQS denominator,
+# assay, or laboratory. This fails the pre-registered comparability audit -> the
+# confirmatory Benchmark #1b is NOT EVALUABLE with these phenotypes (stop rule).
+# Kept here only for the clearly-separated EXPLORATORY analysis. See
+# docs/benchmark_1b_result.md. Source: Summers PhD thesis (ANU), Table 6.3, p.162.
+_S2 = "Summers PhD thesis (ANU) Table 6.3 = PNAS Table S2; HETEROGENEOUS compilation (per-study CQS)"
+RI_DD2 = Param("RI_CQ_Dd2", 11.13, "dimensionless", Kind.DERIVED, sd=1.40, source=_S2, note="n=8 studies; NOT mutually comparable")
+RI_K1 = Param("RI_CQ_K1", 11.79, "dimensionless", Kind.DERIVED, sd=2.01, source=_S2, note="n=4 studies")
+RI_GB4 = Param("RI_CQ_GB4", 8.56, "dimensionless", Kind.DERIVED, sd=1.70, source=_S2, note="n=3 studies")
+RI_ECU = Param("RI_CQ_Ecu1110", 6.50, "dimensionless", Kind.DERIVED, sd=0.89, source=_S2, note="n=2 studies")
+RI_7G8 = Param("RI_CQ_7G8", 6.63, "dimensionless", Kind.DERIVED, sd=0.60, source=_S2, note="n=9 studies")
+RI_PH1 = Param("RI_CQ_Ph1", 5.04, "dimensionless", Kind.DERIVED, sd=0.0, source=_S2, note="n=1 study (no SEM)")

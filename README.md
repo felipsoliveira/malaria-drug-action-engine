@@ -74,7 +74,7 @@ mutações que não foram usados pra construí-lo**. Senão é só ajuste de cur
 
 ## Estado
 
-**Layer B validada + Benchmark #1 (falsificável).** 13/13 testes.
+**Layer B validada + Benchmark #1 (falsificável) + #1b (pré-registrado).** 21/21 testes.
 - **Fatia 1:** ion trapping da cloroquina no vacúolo + efluxo do PfCRT — resistência por *exposição*
   checada contra o oráculo analítico de Henderson-Hasselbalch.
 - **Benchmark #1** ([`docs/parameters_pfcrt.md`](docs/parameters_pfcrt.md)): parâmetros reais com DOI
@@ -87,6 +87,13 @@ mutações que não foram usados pra construí-lo**. Senão é só ajuste de cur
   vacúolo 200–600 µM vs Km 117/232 µM → PfCRT perto da **saturação**). Próximo: ODE **não-linear**
   (Michaelis–Menten) com critérios pré-declarados + held-out K1/GB4/Ecu1110. Um único parâmetro livre
   (κ), estruturalmente identificável sob o modelo. Reproduzir o Dd2 é calibração, não validação.
+- **Benchmark #1b** ([`docs/benchmark_1b_result.md`](docs/benchmark_1b_result.md)): teste confirmatório
+  **pré-registrado** (tag `prereg-1b`) do modelo não-linear (Michaelis–Menten, varredura de C\*).
+  **Desfecho: NÃO AVALIÁVEL** — a *regra de parada* disparou: os *resistance indices* da Table S2 são
+  uma **compilação heterogênea** (CQS por estudo, agregado entre labs/ensaios), sem denominador comum →
+  sem PASS/FAIL. Máquina validada em dados sintéticos **antes** do dado (C\*=0 recupera o #1a; held-out
+  não vaza). Análise exploratória (sem veredito) indica 7G8 ainda anômalo (saturação piora, não salva).
+  É o pré-registro funcionando: impediu um veredito espúrio sobre dado não-comparável.
 
 ## Repositório
 
