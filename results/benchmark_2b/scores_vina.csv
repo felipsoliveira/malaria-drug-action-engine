@@ -1,0 +1,15 @@
+build,variant,vina_affinity,strength
+quad,C59R_S108N_I164L,-9.7,9.7
+quad,C59R_S108N,-9.6,9.6
+quad,N51I_C59R_S108N_I164L,-9.6,9.6
+quad,N51I_C59R_S108N,-9.6,9.6
+quad,N51I_S108N,-9.7,9.7
+quad,S108N,-9.7,9.7
+quad,WT,-9.5,9.5
+wt,C59R_S108N_I164L,-8.6,8.6
+wt,C59R_S108N,-8.7,8.7
+wt,N51I_C59R_S108N_I164L,-8.6,8.6
+wt,N51I_C59R_S108N,-8.7,8.7
+wt,N51I_S108N,-8.7,8.7
+wt,S108N,-8.6,8.6
+wt,WT,-9.7,9.7
