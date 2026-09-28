@@ -4,8 +4,10 @@
 > para *Plasmodium falciparum* — a cadeia: **estrutura → exposição no compartimento do parasita →
 > função molecular → morte por estágio → resistência**.
 
+[![CI](https://github.com/felipsoliveira/malaria-drug-action-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/felipsoliveira/malaria-drug-action-engine/actions/workflows/ci.yml)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
-![Status](https://img.shields.io/badge/status-benchmark_1_falsifiable-blue)
+![Python](https://img.shields.io/badge/python-%3E%3D3.10-3776AB)
+![Status](https://img.shields.io/badge/status-active_research-orange)
 
 
 > **EN / TL;DR:** an open-source mechanistic engine for antimalarial drug action. Most tools stop at
@@ -74,7 +76,7 @@ mutações que não foram usados pra construí-lo**. Senão é só ajuste de cur
 
 ## Estado
 
-**Layer B validada + Benchmark #1 (falsificável) + #1b (pré-registrado).** 21/21 testes.
+**Layer B validada + Benchmark #1 (falsificável) + #1b (pré-registrado).** O repositório atualmente contém **30 testes automatizados** cobrindo os principais componentes e benchmarks.
 - **Fatia 1:** ion trapping da cloroquina no vacúolo + efluxo do PfCRT — resistência por *exposição*
   checada contra o oráculo analítico de Henderson-Hasselbalch.
 - **Benchmark #1** ([`docs/parameters_pfcrt.md`](docs/parameters_pfcrt.md)): parâmetros reais com DOI
@@ -107,12 +109,34 @@ Stack: **Python** (NumPy, SciPy; RDKit/JAX conforme crescer). A camada estrutura
 docking existente (gnina, Vina-GPU) e, pros termos físicos de partição/permeação de membrana,
 dinâmica molecular (PMF de bicamada).
 
+## Desenvolvimento e testes
+
+Instalação de desenvolvimento em um ambiente limpo:
+
+```bash
+git clone https://github.com/felipsoliveira/malaria-drug-action-engine.git
+cd malaria-drug-action-engine
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -e ".[dev]"
+python -m pytest -q
+```
+
+O CI executa a suíte de testes em **Python 3.10, 3.11 e 3.12** a cada pull request e push na
+`main`. Para mudanças científicas, passar nos testes é necessário, mas não suficiente: unidades,
+hipóteses, tolerâncias numéricas, proveniência e consistência física também fazem parte da revisão.
+
 ## Como contribuir
 
 A meta é crescer como projeto aberto pra **auxiliar pesquisadores de malária no Brasil todo** — e no
 mundo. Contribuições bem-vindas: modelos de compartimento, parâmetros com fonte primária, casos de
 validação, dados de PfCRT/K13, revisão de mecanismo. Abra uma *issue* descrevendo a camada (A/B/C/D) e
 a fonte. Todo parâmetro entra com **proveniência + incerteza**.
+
+Leia o [guia de contribuição](CONTRIBUTING.md) antes de mudanças maiores. Pull requests incluem um
+checklist de validação, impacto científico e reprodutibilidade para tornar a revisão técnica
+auditável.
 
 ## 💚 Apoie o projeto
 
