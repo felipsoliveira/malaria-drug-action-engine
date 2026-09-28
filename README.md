@@ -127,6 +127,21 @@ O CI executa a suíte de testes em **Python 3.10, 3.11 e 3.12** a cada pull requ
 `main`. Para mudanças científicas, passar nos testes é necessário, mas não suficiente: unidades,
 hipóteses, tolerâncias numéricas, proveniência e consistência física também fazem parte da revisão.
 
+## Roadmap científico
+
+O próximo ciclo de desenvolvimento está organizado em um
+[roadmap baseado em evidência](docs/evidence_roadmap.md), que transforma resultados da literatura em
+módulos falsificáveis e benchmarks reproduzíveis. As prioridades atuais são:
+
+1. exposição no vacúolo digestivo além de ion trapping simples (PfCRT/PfMDR1);
+2. sobrevivência estágio-específica à artemisinina usando RSA0-3h;
+3. propriedades físico-químicas com proveniência e incerteza;
+4. delayed death do apicoplasto em múltiplos ciclos;
+5. follow-up por amostragem conformacional/energia livre para o benchmark PfDHFR.
+
+Cada módulo novo deve entrar com hipótese, fonte primária, teste automatizado e um critério explícito
+que permita ao resultado falhar.
+
 ## Como contribuir
 
 A meta é crescer como projeto aberto pra **auxiliar pesquisadores de malária no Brasil todo** — e no
